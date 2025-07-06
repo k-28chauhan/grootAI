@@ -7,7 +7,7 @@ import {
   FileSliders,
   SquareTerminal,
 } from "lucide-react"
-
+import { useSidebar } from "./ui/sidebar"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
@@ -17,6 +17,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarTrigger
 } from "@/components/ui/sidebar"
 
 // This is sample data.
@@ -116,9 +117,14 @@ const data = {
 export function AppSidebar({
   ...props
 }) {
+
+  const { state } = useSidebar();
+  const trigger = state==="collapsed" ? "" : "hidden";
+
   return (
     <Sidebar collapsible="icon" className="text-lg" {...props}>
       <SidebarHeader>
+        <SidebarTrigger className={`${trigger}`}/>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>

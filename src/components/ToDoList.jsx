@@ -9,7 +9,7 @@ import { useSidebar } from "./ui/sidebar";
 const ToDoList = () => {
     const [date, setDate] = useState(new Date());
     const { state } = useSidebar(); // "expanded" or "collapsed"
-    const blockHeight = state === "collapsed" ? "h-[25.5rem]" : "h-[22.5rem]";
+    const blockHeight = state === "collapsed" ? "h-80" : "h-72";
     return (
         <div className="flex w-full h-full gap-2">
             <Calendar
@@ -20,11 +20,11 @@ const ToDoList = () => {
             />
             <div className="flex flex-col w-2/3 h-full gap-2">
                 <Button className="mr-3">
-                    <ClipboardCheck className="mr-2" />
+                    <ClipboardCheck />
                     Add Task
                 </Button>
                 <ScrollArea className={`${blockHeight} pr-3`}>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                         <CardItems />
                         <CardItems />
                         <CardItems />

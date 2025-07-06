@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { useTheme } from "./theme-provider";
+import { useSidebar } from "./ui/sidebar";
 import { SidebarTrigger } from "./ui/sidebar";
 import { 
     DropdownMenu, 
@@ -16,10 +17,12 @@ import {
 const Header = () => {
 
     const { theme, setTheme } = useTheme();
+    const { state } = useSidebar(); // "expanded" or "collapsed"
+    const blockHeight = state === "collapsed" ? "hidden" : "h-18";
 
     return (
         <>
-            <header className="w-full flex justify-between h-18 items-center px-4 bg-white/60 backdrop-blur-md border border-white/30 shadow-lg dark:bg-card dark:backdrop-blur-none dark:border-none">
+            <header className={`w-full flex justify-between ${blockHeight} items-center px-4 bg-white/60 backdrop-blur-md border border-white/30 shadow-lg dark:bg-card dark:backdrop-blur-none dark:border-none`}>
                 <SidebarTrigger className="-ml-2 mr-2"/>
                 <Separator orientation="vertical" className="data-[orientation=vertical]:h-8 mr-2"/>
                 <div className="flex-1">
