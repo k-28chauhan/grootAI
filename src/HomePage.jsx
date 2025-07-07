@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useSidebar } from "./components/ui/sidebar";
+import {Separator} from "./components/ui/separator"
 import ToDoList from "./components/ToDoList";
 import Events from "./components/Events";
 import Summary from "./components/Summary";
 import Actions from "./components/Actions";
 import WeatherWidget from "./components/Weather";
 import Focus from "./components/Focus";
+import MailActions from "./components/MailActions";
+import Inbox from "./components/Inbox";
+import Notes from "./components/Notes";
 
 const HomePage = () => {
     const { state } = useSidebar(); // "expanded" or "collapsed"
-    const blockHeight = state === "collapsed" ? "h-96" : "h-[22rem]";
+    const blockHeight = state === "collapsed" ? "h-96 mt-4" : "h-[22rem]";
 
     return (
 
@@ -26,11 +30,17 @@ const HomePage = () => {
                     <Actions />
                 </div>
                 <div className={`flex flex-col gap-4 rounded-xl ${blockHeight}`}>
-                <WeatherWidget />
-                <Focus />
+                    <WeatherWidget />
+                    <Focus />
                 </div>
-                <div className={`bg-muted/50 rounded-xl lg:col-span-2 ${blockHeight}`}></div>
-                <div className={`bg-muted/50 rounded-xl ${blockHeight}`}></div>
+                <div className={`flex gap-2 bg-card rounded-xl lg:col-span-2 ${blockHeight}`}>
+                    <MailActions />
+                    <Separator orientation="vertical" className="h-3/4"/>
+                    <Inbox />
+                </div>
+                <div className={`bg-muted/50 rounded-xl ${blockHeight}`}>
+                    <Notes />
+                </div>
             </div>
         </div>
     )
