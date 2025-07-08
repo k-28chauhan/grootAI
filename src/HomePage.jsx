@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useSidebar } from "./components/ui/sidebar";
 import {Separator} from "./components/ui/separator"
-import ToDoList from "./components/ToDoList";
-import Events from "./components/Events";
-import Summary from "./components/Summary";
-import Actions from "./components/Actions";
-import WeatherWidget from "./components/Weather";
-import Focus from "./components/Focus";
-import MailActions from "./components/MailActions";
-import Inbox from "./components/Inbox";
-import Notes from "./components/Notes";
+import ToDoList from "./features/todo/ToDoList";
+import Events from "./features/events/Events";
+import Summary from "./features/summary/Summary";
+import Actions from "./features/quickAction/Actions";
+import WeatherWidget from "./features/weather/Weather";
+import Focus from "./features/focus/Focus";
+import MailActions from "./features/mail/MailActions";
+import Inbox from "./features/inbox/Inbox";
+import Notes from "./features/notes/Notes";
 
 const HomePage = () => {
     const { state } = useSidebar(); // "expanded" or "collapsed"

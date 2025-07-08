@@ -1,9 +1,9 @@
-import { AppSidebar } from "./components/app-sidebar"
+import { AppSidebar } from "./features/sidebar/app-sidebar"
 import { SidebarProvider } from "./components/ui/sidebar"
-import { ThemeProvider } from "@/components/theme-provider"
-import Header from "./components/Header"
+import { ThemeProvider } from "./features/header/theme-provider"
+import Header from "./features/header/Header"
 import HomePage from "./HomePage"
-import { useTheme } from "./components/theme-provider"
+import { useTheme } from "./features/header/theme-provider"
 
 function AppContent() {
   const { theme } = useTheme();

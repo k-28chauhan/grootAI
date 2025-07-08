@@ -1,4 +1,4 @@
-import { Card } from "./ui/card";
+import { Card } from "../../components/ui/card";
 import { Brain } from "lucide-react";
 
 const Summary = () => {

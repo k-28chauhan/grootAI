@@ -1,7 +1,7 @@
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 import { Pencil, Mail } from "lucide-react"
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "../../components/ui/avatar";
 
 const MailActions = () => {
 

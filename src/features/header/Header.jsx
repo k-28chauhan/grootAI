@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { MoonStar, Sun, Mic, Plus, Menu } from 'lucide-react';
-import { Input } from "./ui/input";
-import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
+import { Input } from "../../components/ui/input";
+import { Separator } from "../../components/ui/separator";
+import { Button } from "../../components/ui/button";
 import { useTheme } from "./theme-provider";
-import { useSidebar } from "./ui/sidebar";
-import { SidebarTrigger } from "./ui/sidebar";
+import { useSidebar } from "../../components/ui/sidebar";
+import { SidebarTrigger } from "../../components/ui/sidebar";
 import { 
     DropdownMenu, 
     DropdownMenuTrigger, 
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuSeparator
-} from "./ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 
 const Header = () => {
 

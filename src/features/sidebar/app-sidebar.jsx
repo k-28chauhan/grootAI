@@ -7,10 +7,10 @@ import {
   FileSliders,
   SquareTerminal,
 } from "lucide-react"
-import { useSidebar } from "./ui/sidebar"
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { useSidebar } from "../../components/ui/sidebar"
+import { NavMain } from "../nav/nav-main"
+import { NavUser } from "../nav/nav-user"
+import { TeamSwitcher } from "../team/team-switcher"
 import {
   Sidebar,
   SidebarContent,
