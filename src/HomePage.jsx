@@ -13,7 +13,7 @@ import Notes from "./features/notes/Notes";
 
 const HomePage = () => {
     const { state } = useSidebar(); // "expanded" or "collapsed"
-    const blockHeight = state === "collapsed" ? "h-96 mt-4" : "h-[22rem]";
+    const blockHeight = state === "collapsed" ? "h-96 mt-4" : "h-[23rem]";
 
     return (
 

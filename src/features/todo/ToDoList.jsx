@@ -1,5 +1,5 @@
 import { Calendar } from "../../components/ui/calendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollArea } from "../../components/ui/scroll-area";
 import CardItems from "./CardItems";
 import { Button } from "../../components/ui/button";
@@ -14,10 +14,16 @@ const ToDoList = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const tasks = useToDoStore((state) => state.tasks);
     const addTasks = useToDoStore((state) => state.addTasks);
+    const fetchData = useToDoStore((state) => state.fetchData);
     const deleteTasks = useToDoStore((state) => state.deleteTasks);
 
+
     const { state } = useSidebar(); // "expanded" or "collapsed"
-    const blockHeight = state === "collapsed" ? "h-80" : "h-72";
+    const blockHeight = state === "collapsed" ? "h-80" : "h-[18.5rem]";
+
+    useEffect(() => {
+        fetchData();
+    }, [])
 
     return (
         <div className="flex w-full h-full gap-2">
@@ -50,7 +56,7 @@ const ToDoList = () => {
                             }}>Submit</Button>
                     </DialogContent>
                 </Dialog>
-                <ScrollArea className={`${blockHeight} pr-3`}>
+                <ScrollArea className={`${blockHeight} mt-2 pr-3`}>
                     <div className="flex flex-col h-full gap-2">
                         {tasks.length > 0 ? (
                             tasks.map((task) => (
