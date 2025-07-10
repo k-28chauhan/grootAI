@@ -18,7 +18,7 @@ const Header = () => {
 
     const { theme, setTheme } = useTheme();
     const { state } = useSidebar(); // "expanded" or "collapsed"
-    const blockHeight = state === "collapsed" ? "hidden" : "h-18";
+    const blockHeight = state === "collapsed" ? "hidden" : "h-16";
 
     return (
         <>

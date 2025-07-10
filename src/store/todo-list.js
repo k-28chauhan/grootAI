@@ -4,6 +4,11 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3500/posts";
 
+export const useAuthStore = create((set) => ({
+    accessToken: null,
+    setAccessToken: (token) => set({accessToken: token})
+}));
+
 export const useSidebarStore = create(
     persist(
         (set) => ({
@@ -32,6 +37,14 @@ export const useToDoStore = create((set, get) => ({
         set((state) => ({
             tasks: [...state.tasks, res.data]
         }));
+    },
+    editTasks: async (id, updatedTask) => {
+        await axios.patch(`${API_URL}/${id}`, {task: updatedTask});
+        set((state) => ({
+            tasks: state.tasks.map((task) => 
+            task.id == id ? {...task, task: updatedTask} : task
+            )
+        }))
     },
     checkedTasks: async (id) => {
         const currentTask = get().tasks.find((task) => task.id == id);
