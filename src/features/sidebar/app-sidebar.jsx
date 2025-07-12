@@ -19,13 +19,19 @@ import {
   SidebarRail,
   SidebarTrigger
 } from "@/components/ui/sidebar"
+import { useAuthStore } from "../../store/todo-list"
 
+
+export function AppSidebar({
+  ...props
+}) {
+  const userProfile = useAuthStore((state) => state.userProfile);
 // This is sample data.
 const data = {
   user: {
-    name: "Karaninder Singh",
-    email: "karaninder.yps@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: userProfile?.name || "No Name",
+    email: userProfile?.email || "No Email",
+    avatar: userProfile?.picture || "/avatars/shadcn.jpg",
   },
   teams: [
     {
@@ -113,10 +119,6 @@ const data = {
     }
   ]
 }
-
-export function AppSidebar({
-  ...props
-}) {
 
   const { state } = useSidebar();
   const trigger = state==="collapsed" ? "" : "hidden";

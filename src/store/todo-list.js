@@ -6,7 +6,9 @@ const API_URL = "http://localhost:3500/posts";
 
 export const useAuthStore = create((set) => ({
     accessToken: null,
-    setAccessToken: (token) => set({accessToken: token})
+    userProfile: null,
+    setAccessToken: (token) => set({accessToken: token}),
+    setUserProfile: (profile) => set({userProfile: profile})
 }));
 
 export const useSidebarStore = create(

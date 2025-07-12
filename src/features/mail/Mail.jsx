@@ -13,7 +13,7 @@ const Mail = ({ blockHeight }) => {
                 <Login />
             )
                 : (
-                    <div className={`flex gap-2 ${blockHeight}`}>
+                    <div className={`flex gap-2 mt-0 ${blockHeight}`}>
                         <MailActions />
                         <Separator orientation="vertical" className="h-3/4" />
                         <Inbox />

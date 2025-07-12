@@ -9,7 +9,7 @@ const Inbox = () => {
 
     useEffect(() => {
         console.log("useEffect ran. accessToken =", accessToken);
-        if(accessToken) fetchMail();
+        if (accessToken) fetchMail();
     }, [accessToken]);
     const fetchMail = async () => {
         console.log("fetchMail called");
@@ -18,7 +18,7 @@ const Inbox = () => {
 
         try {
             const listRes = await fetch(
-                "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=10&labelIds=INBOX",
+                "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=4&labelIds=INBOX",
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`
@@ -28,7 +28,7 @@ const Inbox = () => {
             const listData = await listRes.json();
             console.log(listData);
 
-            if(!listData.messages){
+            if (!listData.messages) {
                 setEmails([]);
                 return;
             }
@@ -43,19 +43,48 @@ const Inbox = () => {
                         }
                     )
                     const data = await res.json();
+                    console.log(data);
+                    const headers = data.payload.headers.reduce((acc, h) => {
+                        acc[h.name] = h.value;
+                        return acc;
+                    }, {});
+                    return {
+                        id: msg.id,
+                        subject: headers.Subject || "No subject",
+                        from: headers.From?.split("<")[0]?.trim() || "No sender name",
+                        date: formatInternalDate(data.internalDate)
+                    }
                 })
-
-            )
+            );
+            setEmails(detailedEmails);
         } catch (error) {
-
+            console.error("Error fetching mails", error);
         }
+        setLoading(false);
     }
+    const formatInternalDate = (internalDate) => {
+        const date = new Date(Number(internalDate));
+        const day = date.getDate(); // 1-31
+        const month = date.toLocaleString("default", { month: "short" }); // "Jul"
+        return `${day} ${month}`; // "12 Jul"
+    }
+    console.log(emails);
     return (
-        <div className="flex flex-col flex-1 gap-4 p-4 -ml-1">
-            <InboxItem />
-            <InboxItem />
-            <InboxItem />
-            <InboxItem />
+        <div className="flex flex-col flex-1 gap-4 p-4 -ml-1 ">
+            {
+                (loading)?
+                <div className="text-center">
+                    Loading emails...
+                </div>
+                :
+                emails.map((email) => (
+                    <InboxItem
+                        key={email.id}
+                        subject={email.subject}
+                        from={email.from}
+                        date={email.date} />
+                ))
+            }
         </div>
     )
 }
