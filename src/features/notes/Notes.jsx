@@ -5,7 +5,8 @@ const Notes = () => {
   const [notes, setNotes] = useState([
     { id: 1, title: "Sample Note", content: "This is a sample note." },
     { id: 1, title: "Sample Note", content: "This is a sample note with some extra stuff" },
-    { id: 1, title: "Sample Note", content: "This is a sample note with even more extra boring unnecessary stuff." }
+    { id: 1, title: "Sample Note", content: "This is a sample note with even more extra boring unnecessary stuff." },
+    { id: 1, title: "Sample Note", content: "This is a sample note with even more extra boring unnecessary stuff." },
   ]);
 
   return (

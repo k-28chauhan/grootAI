@@ -70,7 +70,7 @@ const Inbox = () => {
     }
     console.log(emails);
     return (
-        <div className="flex flex-col flex-1 gap-4 p-4 -ml-1 ">
+        <div className="flex flex-col w-4/5 gap-4 p-4 -ml-1 ">
             {
                 (loading)?
                 <div className="text-center">
