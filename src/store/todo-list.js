@@ -2,7 +2,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
 
-const API_URL = "http://localhost:3500/posts";
+const TASKS_URL = "http://localhost:3500/posts";
+const NOTES_URL = "http://localhost:4500/notes";
 
 export const useAuthStore = create((set) => ({
     accessToken: null,
@@ -32,18 +33,18 @@ export const useSidebarStore = create(
 export const useToDoStore = create((set, get) => ({
     tasks: [],
     fetchData: async () => {
-        const res = await axios.get(API_URL);
+        const res = await axios.get(TASKS_URL);
         set({tasks: res.data});
     },
     addTasks: async (task) => {
         const newTask = {task, completed:false};
-        const res = await axios.post(API_URL, newTask);
+        const res = await axios.post(TASKS_URL, newTask);
         set((state) => ({
             tasks: [...state.tasks, res.data]
         }));
     },
     editTasks: async (id, updatedTask) => {
-        await axios.patch(`${API_URL}/${id}`, {task: updatedTask});
+        await axios.patch(`${TASKS_URL}/${id}`, {task: updatedTask});
         set((state) => ({
             tasks: state.tasks.map((task) => 
             task.id == id ? {...task, task: updatedTask} : task
@@ -55,7 +56,7 @@ export const useToDoStore = create((set, get) => ({
         if(!currentTask) return;
         const updatedTask = !currentTask.completed;
 
-        await axios.patch(`${API_URL}/${id}`, {completed: updatedTask});
+        await axios.patch(`${TASKS_URL}/${id}`, {completed: updatedTask});
         set((state) => ({
             tasks: state.tasks.map((task) => 
                 task.id == id ? {...task, completed: updatedTask} : task
@@ -63,7 +64,36 @@ export const useToDoStore = create((set, get) => ({
         }))
     },
     deleteTasks: async (id) => {
-        await axios.delete(`${API_URL}/${id}`);
+        await axios.delete(`${TASKS_URL}/${id}`);
+        set((state) => ({
+            tasks: state.tasks.filter((task) => task.id != id)
+        }));
+    }
+
+}));
+export const useNotesStore = create((set) => ({
+    tasks: [],
+    fetchNotes: async () => {
+        const res = await axios.get(NOTES_URL);
+        set({tasks: res.data});
+    },
+    addNotes: async (title, task) => {
+        const newTask = {title, task};
+        const res = await axios.post(NOTES_URL, newTask);
+        set((state) => ({
+            tasks: [...state.tasks, res.data]
+        }));
+    },
+    editNotes: async (id,updatedTitle, updatedTask) => {
+        await axios.patch(`${NOTES_URL}/${id}`, {title: updatedTitle, task: updatedTask});
+        set((state) => ({
+            tasks: state.tasks.map((task) => 
+            task.id == id ? {...task, title: updatedTitle, task: updatedTask} : task
+            )
+        }))
+    },
+    deleteNotes: async (id) => {
+        await axios.delete(`${NOTES_URL}/${id}`);
         set((state) => ({
             tasks: state.tasks.filter((task) => task.id != id)
         }));
